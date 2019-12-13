@@ -360,13 +360,14 @@ def eval_func(epoch):
     #net.load_state_dict(torch.load('ssd300_mAP_77.43_v2.pth'))
     net.eval()
     print('Finished loading model!')
-    # load data
-    dataset = VOCDetection(voc_root, [('2007', set_type)],
-                           BaseTransform(300, dataset_mean),
-                           VOCAnnotationTransform())
+    if epoch % 100 == 0:
+        # load data
+        dataset = VOCDetection(voc_root, [('2007', set_type)],
+                               BaseTransform(300, dataset_mean),
+                               VOCAnnotationTransform())
 
-    test_net(save_folder, net, dataset,
-             BaseTransform(net.size, dataset_mean), top_k, 300,
-             thresh=confidence_threshold)
+        test_net(save_folder, net, dataset,
+                 BaseTransform(net.size, dataset_mean), top_k, 300,
+                 thresh=confidence_threshold)
 if __name__ == '__main__':
     eval_func()
