@@ -78,6 +78,8 @@ def train() :
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
     net = build_ssd('train', cfg['min_dim'], cfg['num_classes']).to(0)
+    for param in net.vgg.parameters():
+        param.requires_grad = False
     optimizer = optim.SGD(net.parameters(), lr=lr, momentum=momentum,
                           weight_decay=weight_decay)
 
