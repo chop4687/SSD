@@ -331,8 +331,8 @@ def test_net(save_folder, net, dataset, transform, top_k,
             boxes[:, 2] *= w
             boxes[:, 1] *= h
             boxes[:, 3] *= h
-            scores = dets[:, 0].cpu().numpy()
-            cls_dets = np.hstack((boxes.cpu().numpy(),
+            scores = dets[:, 0]
+            cls_dets = np.hstack((boxes,
                                   scores[:, np.newaxis])).astype(np.float32,
                                                                  copy=False)
             all_boxes[j][i] = cls_dets
