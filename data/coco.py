@@ -7,7 +7,7 @@ import torchvision.transforms as transforms
 import cv2
 import numpy as np
 
-COCO_ROOT = osp.join('content/SSD/data/')
+COCO_ROOT = osp.join('/content/SSD/data/')
 IMAGES = 'images'
 ANNOTATIONS = 'annotations'
 COCO_API = 'PythonAPI'
