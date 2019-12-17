@@ -62,11 +62,10 @@ def jaccard(box_a, box_b):
     """
     inter = intersect(box_a, box_b)
     area_a = ((box_a[:, 2]-box_a[:, 0]) *
-              (box_a[:, 3]-box_a[:, 1])).unsqueeze(1).expand_as(inter)  # [A,B]
+              (box_a[:, 3]-box_a[:, 1])).unsqueeze(1).expand_as(inter).cuda()  # [A,B]
     area_b = ((box_b[:, 2]-box_b[:, 0]) *
-              (box_b[:, 3]-box_b[:, 1])).unsqueeze(0).expand_as(inter)  # [A,B]
+              (box_b[:, 3]-box_b[:, 1])).unsqueeze(0).expand_as(inter).cuda()  # [A,B]
     union = area_a + area_b - inter
-    union = union.cuda()
     return inter / union  # [A,B]
 
 
@@ -126,7 +125,7 @@ def encode(matched, priors, variances):
     Return:
         encoded boxes (tensor), Shape: [num_priors, 4]
     """
-    priors = prios.cuda()
+    priors = priors.cuda()
     # dist b/t match center and prior's center
     g_cxcy = (matched[:, :2] + matched[:, 2:])/2 - priors[:, :2]
     # encode variance
