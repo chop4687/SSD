@@ -9,9 +9,6 @@ import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
-from data import VOC_ROOT, VOCAnnotationTransform, VOCDetection, BaseTransform
-from data import VOC_CLASSES as labelmap
-import torch.utils.data as data
 
 from ssd import build_ssd
 
@@ -27,15 +24,6 @@ if sys.version_info[0] == 2:
     import xml.etree.cElementTree as ET
 else:
     import xml.etree.ElementTree as ET
-
-trained_model = 'weights/ssd300_COCO_115000.pth'
-save_folder = 'eval/'
-confidence_threshold = 0.01
-top_k = 5
-cuda = True
-voc_root = VOC_ROOT
-cleanup = True
-
 
 
 if not os.path.exists(save_folder):
@@ -55,10 +43,6 @@ annopath = os.path.join(voc_root, 'VOC2007', 'Annotations', '%s.xml')
 imgpath = os.path.join(voc_root, 'VOC2007', 'JPEGImages', '%s.jpg')
 imgsetpath = os.path.join(voc_root, 'VOC2007', 'ImageSets',
                           'Main', '{:s}.txt')
-YEAR = '2007'
-devkit_path = voc_root + 'VOC' + YEAR
-dataset_mean = (104, 117, 123)
-set_type = 'val'
 
 
 class Timer(object):
