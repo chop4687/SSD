@@ -25,10 +25,6 @@ if sys.version_info[0] == 2:
 else:
     import xml.etree.ElementTree as ET
 
-
-if not os.path.exists(save_folder):
-    os.mkdir(save_folder)
-
 if torch.cuda.is_available():
     if cuda:
         torch.set_default_tensor_type('torch.cuda.FloatTensor')
