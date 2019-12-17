@@ -11,6 +11,8 @@ import torch.backends.cudnn as cudnn
 from torch.autograd import Variable
 
 from ssd import build_ssd
+from data import VOC_ROOT
+from data import VOC_CLASSES as labelmap
 
 import sys
 import os
@@ -19,6 +21,10 @@ import argparse
 import numpy as np
 import pickle
 import cv2
+
+cuda = True
+voc_root = VOC_ROOT
+
 
 if sys.version_info[0] == 2:
     import xml.etree.cElementTree as ET
