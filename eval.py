@@ -22,8 +22,15 @@ import numpy as np
 import pickle
 import cv2
 
-cuda = True
 voc_root = VOC_ROOT
+YEAR = '2007'
+devkit_path = voc_root + 'VOC' + YEAR
+dataset_mean = (104, 117, 123)
+set_type = 'val'
+confidence_threshold = 0.01
+top_k = 5
+cuda = True
+cleanup = True
 
 
 if sys.version_info[0] == 2:
