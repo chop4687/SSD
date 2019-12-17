@@ -197,7 +197,7 @@ class RandomBrightness(object):
 
 class ToCV2Image(object):
     def __call__(self, tensor, boxes=None, labels=None):
-        return tensor.astype(np.float32).transpose((1, 2, 0)), boxes, labels
+        return tensor.cpu().numpy().astype(np.float32).transpose((1, 2, 0)), boxes, labels
 
 
 class ToTensor(object):
