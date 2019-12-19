@@ -121,7 +121,7 @@ def get_voc_results_file_template(image_set, cls):
     return path
 
 
-def write_voc_results_file(all_boxes, dataset):
+def write_voc_results_file(all_boxes, dataset, labelmap):
     for cls_ind, cls in enumerate(labelmap):
         print('Writing {:s} VOC results file'.format(cls))
         filename = get_voc_results_file_template(set_type, cls)
@@ -343,6 +343,8 @@ cachedir: Directory for caching the annotations
 def test_net(save_folder, net, cuda, dataset, transform, top_k,
              im_size=300, thresh=0.05):
     num_images = len(dataset)
+    if num_images == 128:
+        labelmap = ('apple','orange')
     # all detections are collected into:
     #    all_boxes[cls][image] = N x 5 array of detections in
     #    (x1, y1, x2, y2, score)
@@ -389,11 +391,11 @@ def test_net(save_folder, net, cuda, dataset, transform, top_k,
         pickle.dump(all_boxes, f, pickle.HIGHEST_PROTOCOL)
 
     print('Evaluating detections')
-    evaluate_detections(all_boxes, output_dir, dataset)
+    evaluate_detections(all_boxes, output_dir, dataset, labelmap)
 
 
-def evaluate_detections(box_list, output_dir, dataset):
-    write_voc_results_file(box_list, dataset)
+def evaluate_detections(box_list, output_dir, dataset, labelmap):
+    write_voc_results_file(box_list, dataset, labelmap)
     do_python_eval(output_dir)
 
 
