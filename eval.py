@@ -343,8 +343,6 @@ cachedir: Directory for caching the annotations
 def test_net(save_folder, net, cuda, dataset, transform, top_k,
              im_size=300, thresh=0.05):
     num_images = len(dataset)
-    if num_images == 128:
-        labelmap = ('apple','orange')
     # all detections are collected into:
     #    all_boxes[cls][image] = N x 5 array of detections in
     #    (x1, y1, x2, y2, score)
